@@ -1,0 +1,1281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Divine Edet – Designer & Developer</title>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <!--
+  <link rel="stylesheet" href="firstsyle.css"/> <-->
+  <style>
+      *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+/* ============================================
+   NEOPROFILE COLOUR THEMES
+   To change theme: uncomment your preferred
+   theme and comment out the active one
+   ============================================ */
+
+/* THEME 1 — Ocean Blue (Default) */
+:root {
+  --primary: #1065C0;
+  --primary-light: #41A7F5;
+  --primary-mid: #2486D8;
+  --black: #0A0A0A;
+  --dark: #111111;
+  --card-dark: #1C1C1C;
+  --text-light: #F5F5F5;
+  --gradient: linear-gradient(135deg, #1065C0, #41A7F5);
+  --gradient45: linear-gradient(45deg, #1065C0, #41A7F5);
+}
+
+/* THEME 2 — Emerald Green
+:root {
+  --primary: #057A55;
+  --primary-light: #31C48D;
+  --primary-mid: #0E9F6E;
+  --black: #0A0A0A;
+  --dark: #111111;
+  --card-dark: #1C1C1C;
+  --text-light: #F5F5F5;
+  --gradient: linear-gradient(135deg, #057A55, #31C48D);
+  --gradient45: linear-gradient(45deg, #057A55, #31C48D);
+}
+*/
+
+/* THEME 3 — Sunset Orange
+:root {
+  --primary: #C05621;
+  --primary-light: #F6AD55;
+  --primary-mid: #DD6B20;
+  --black: #0A0A0A;
+  --dark: #111111;
+  --card-dark: #1C1C1C;
+  --text-light: #F5F5F5;
+  --gradient: linear-gradient(135deg, #C05621, #F6AD55);
+  --gradient45: linear-gradient(45deg, #C05621, #F6AD55);
+}
+*/
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  background: #fff;
+  color: #111;
+  overflow-x: hidden;
+}
+
+/* LOADER */
+.loader {
+  position: fixed;
+  inset: 0;
+  background: #0A0A0A;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.6s ease;
+  pointer-events: all;
+}
+.loader.hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+.loader-inner {
+  text-align: center;
+  width: 260px;
+}
+.loader-logo {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 38px;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 32px;
+  animation: pulse 1.5s ease infinite;
+}
+.loader-logo span { color: var(--primary-light); }
+.loader-label {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+.loader-text {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 11px;
+  font-weight: 500;
+  color: rgba(255,255,255,0.3);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+.loader-percent {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  color: #ffffff;
+  text-shadow: 0 0 12px var(--primary-light), 0 0 24px var(--primary);
+}
+.loader-bar {
+  width: 100%;
+  height: 3px;
+  background: rgba(255,255,255,0.1);
+  border-radius: 10px;
+  overflow: hidden;
+}
+.loader-fill {
+  height: 100%;
+  width: 0%;
+  background: var(--gradient);
+  border-radius: 10px;
+}
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+/* NAV */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 1000;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 18px 60px;
+  background: rgba(10, 10, 10, 0.85);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+.nav-logo {
+  font-size: 22px;
+  font-weight: 700;
+  color: #fff;
+  text-decoration: none;
+  letter-spacing: 1px;
+}
+.nav-logo span { color: var(--primary-light); }
+.nav-links {
+  display: flex;
+  gap: 36px;
+  list-style: none;
+}
+.nav-links a {
+  text-decoration: none;
+  color: #fff;
+  font-size: 15px;
+  font-weight: 500;
+  position: relative;
+  padding-bottom: 4px;
+  transition: color 0.3s;
+}
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0;
+  width: 0; height: 2px;
+  background: var(--gradient);
+  transition: width 0.3s;
+}
+.nav-links a:hover { color: var(--primary-light); }
+.nav-links a:hover::after { width: 100%; }
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 4px;
+}
+.hamburger span {
+  display: block;
+  width: 25px; height: 3px;
+  background: #fff;
+  border-radius: 3px;
+  transition: 0.3s;
+}
+
+/* HERO */
+#home {
+  min-height: 100vh;
+  background: var(--black);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 140px 80px 80px;
+  position: relative;
+  overflow: hidden;
+}
+#home::before {
+  content: '';
+  position: absolute;
+  width: 500px; height: 500px;
+  border-radius: 50%;
+  background: rgba(16, 101, 192, 0.1);
+  top: -100px; right: -100px;
+}
+#home::after {
+  content: '';
+  position: absolute;
+  width: 350px; height: 350px;
+  border-radius: 50%;
+  background: rgba(65, 167, 245, 0.06);
+  bottom: -80px; left: -80px;
+}
+.hero-tag {
+  display: inline-block;
+  background: rgba(16, 101, 192, 0.15);
+  color: var(--primary-light);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  padding: 6px 18px;
+  border-radius: 20px;
+  margin-bottom: 24px;
+  border: 1px solid rgba(65,167,245,0.3);
+}
+.hero-title {
+  font-size: clamp(36px, 6vw, 72px);
+  font-weight: 700;
+  color: #fff;
+  line-height: 1.1;
+  letter-spacing: -1px;
+  margin-bottom: 10px;
+}
+.hero-name {
+  display: block;
+  color: var(--primary-light);
+}
+.hero-sub {
+  font-size: 20px;
+  color: rgba(255,255,255,0.7);
+  margin-bottom: 12px;
+  font-weight: 500;
+}
+.hero-desc {
+  font-size: 16px;
+  color: rgba(255,255,255,0.5);
+  margin-bottom: 44px;
+  max-width: 480px;
+  line-height: 1.7;
+}
+.hero-btns { display: flex; gap: 16px; flex-wrap: wrap; }
+
+.btn-primary {
+  background: var(--gradient45);
+  color: #fff;
+  border: none;
+  padding: 14px 34px;
+  border-radius: 8px;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.3s, box-shadow 0.3s;
+  text-decoration: none;
+  font-family: 'Space Grotesk', sans-serif;
+}
+.btn-primary:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 30px rgba(16,101,192,0.4);
+}
+.btn-outline {
+  background: transparent;
+  color: #fff;
+  border: 2px solid rgba(255,255,255,0.3);
+  padding: 14px 34px;
+  border-radius: 8px;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s;
+  text-decoration: none;
+  font-family: 'Space Grotesk', sans-serif;
+}
+.btn-outline:hover {
+  border-color: var(--primary-light);
+  color: var(--primary-light);
+  transform: translateY(-3px);
+}
+.social-icons {
+  display: flex;
+  gap: 14px;
+  margin-top: 60px;
+}
+.social-icons a {
+  width: 42px; height: 42px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255,255,255,0.6);
+  font-size: 15px;
+  text-decoration: none;
+  transition: all 0.3s;
+}
+.social-icons a:hover {
+  background: var(--primary);
+  border-color: var(--primary-light);
+  color: #fff;
+  transform: translateY(-4px);
+}
+
+/* STATS */
+#stats {
+  background: #0A0A0A;
+  padding: 80px 60px;
+  border-top: 1px solid rgba(255,255,255,0.05);
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 40px;
+  max-width: 1000px;
+  margin: 0 auto;
+  text-align: center;
+}
+.stat-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+.stat-item::after {
+  content: '';
+  position: absolute;
+  right: 0; top: 20%;
+  height: 60%;
+  width: 1px;
+  background: rgba(255,255,255,0.08);
+}
+.stat-item:last-child::after { display: none; }
+.stat-number {
+  font-size: clamp(42px, 6vw, 72px);
+  font-weight: 700;
+  color: #fff;
+  line-height: 1;
+  background: var(--gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.stat-plus {
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--primary-light);
+  margin-top: -8px;
+  -webkit-text-fill-color: var(--primary-light);
+}
+.stat-label {
+  font-size: 14px;
+  font-weight: 500;
+  color: rgba(255,255,255,0.4);
+  margin-top: 10px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+/* ABOUT */
+#about {
+  padding: 120px 80px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.about-text h2 {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  color: var(--primary);
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+.about-text h1 {
+  font-size: clamp(28px, 4vw, 44px);
+  font-weight: 700;
+  color: #111;
+  line-height: 1.2;
+  margin-bottom: 20px;
+}
+.about-text p {
+  font-size: 16px;
+  line-height: 1.8;
+  color: #666;
+  margin-bottom: 36px;
+}
+.about-btns { display: flex; gap: 16px; flex-wrap: wrap; }
+
+.btn-dark {
+  background: var(--black);
+  color: #fff;
+  border: none;
+  padding: 14px 30px;
+  border-radius: 8px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s;
+  text-decoration: none;
+  font-family: 'Space Grotesk', sans-serif;
+}
+.btn-dark:hover {
+  background: var(--primary);
+  transform: translateY(-3px);
+  box-shadow: 0 10px 25px rgba(16,101,192,0.3);
+}
+.btn-border {
+  background: transparent;
+  color: #333;
+  border: 2px solid #ddd;
+  padding: 14px 30px;
+  border-radius: 8px;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s;
+  text-decoration: none;
+  font-family: 'Space Grotesk', sans-serif;
+}
+.btn-border:hover {
+  border-color: var(--primary);
+  color: var(--primary);
+  transform: translateY(-3px);
+}
+
+/* SKILLS */
+.skills-side h2 {
+  font-size: 22px;
+  font-weight: 700;
+  color: #111;
+  margin-bottom: 28px;
+}
+.skill-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(2, auto);
+  gap: 20px;
+}
+.skill-item {
+  background: #f4f7fb;
+  border-radius: 12px;
+  padding: 16px;
+  border: 1px solid #dde8f5;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+.skill-item:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(16,101,192,0.12);
+}
+.skill-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 12px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 10px;
+}
+.pct {
+  color: var(--primary);
+  font-weight: 700;
+  font-size: 12px;
+}
+.skill-bar {
+  height: 6px;
+  background: #dde8f5;
+  border-radius: 10px;
+  overflow: hidden;
+}
+.skill-fill {
+  height: 100%;
+  background: var(--gradient45);
+  border-radius: 10px;
+  width: 0;
+  transition: width 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 0 8px rgba(16,101,192,0.4);
+}
+
+/* SERVICES */
+#services {
+  background: var(--dark);
+  padding: 120px 60px;
+}
+.section-header {
+  text-align: center;
+  margin-bottom: 72px;
+}
+.section-tag {
+  display: inline-block;
+  background: rgba(16,101,192,0.2);
+  color: var(--primary-light);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  padding: 6px 18px;
+  border-radius: 6px;
+  margin-bottom: 16px;
+  border: 1px solid rgba(65,167,245,0.2);
+}
+.section-header h1 {
+  font-size: clamp(32px, 5vw, 56px);
+  font-weight: 700;
+  color: var(--text-light);
+  margin-bottom: 16px;
+}
+.section-header p {
+  font-size: 17px;
+  color: rgba(245,245,245,0.5);
+  max-width: 500px;
+  margin: 0 auto;
+  line-height: 1.7;
+}
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 24px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.service-card {
+  background: var(--card-dark);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 16px;
+  padding: 32px 24px;
+  transition: all 0.3s;
+  position: relative;
+  overflow: hidden;
+}
+.service-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: var(--gradient45);
+  transform: scaleX(0);
+  transition: transform 0.3s;
+}
+.service-card:hover {
+  border-color: rgba(16,101,192,0.4);
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px rgba(16,101,192,0.15);
+}
+.service-card:hover::before { transform: scaleX(1); }
+.service-icon {
+  width: 52px; height: 52px;
+  background: rgba(16,101,192,0.15);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  margin-bottom: 18px;
+  color: var(--primary-light);
+}
+.service-card h2 {
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--text-light);
+  margin-bottom: 12px;
+}
+.service-card p {
+  font-size: 14px;
+  color: rgba(245,245,245,0.45);
+  line-height: 1.75;
+}
+
+/* PORTFOLIO */
+#portfolio {
+  padding: 120px 60px;
+  background: #f4f7fb;
+}
+#portfolio .section-header h1 { color: #111; }
+#portfolio .section-header p { color: #777; }
+#portfolio .section-tag {
+  background: rgba(16,101,192,0.08);
+  color: var(--primary);
+  border-color: rgba(16,101,192,0.15);
+}
+.portfolio-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  max-width: 1100px;
+  margin: 0 auto 50px;
+}
+.portfolio-item {
+  border-radius: 12px;
+  overflow: hidden;
+  position: relative;
+  aspect-ratio: 4/3;
+  background: #1C1C1C;
+  cursor: pointer;
+}
+.portfolio-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s;
+}
+.portfolio-overlay {
+  position: absolute;
+  inset: 0;
+  background: var(--gradient45);
+  opacity: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.3s;
+}
+.portfolio-overlay i { color: #fff; font-size: 26px; }
+.portfolio-item:hover img { transform: scale(1.08); }
+.portfolio-item:hover .portfolio-overlay { opacity: 0.9; }
+.portfolio-placeholder {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255,255,255,0.15);
+  font-size: 13px;
+  letter-spacing: 3px;
+  font-weight: 600;
+}
+.view-more-wrap {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+/* CONTACT */
+#contact {
+  background: var(--dark);
+  padding: 120px 60px;
+}
+#contact .section-header h1 { color: var(--text-light); }
+#contact .section-header p { color: rgba(245,245,245,0.5); }
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.4fr;
+  gap: 60px;
+  max-width: 1000px;
+  margin: 0 auto;
+  align-items: start;
+}
+.contact-info h3 {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--text-light);
+  margin-bottom: 12px;
+}
+.contact-info p {
+  font-size: 15px;
+  color: rgba(245,245,245,0.5);
+  line-height: 1.8;
+  margin-bottom: 36px;
+}
+.contact-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 20px;
+  color: rgba(245,245,245,0.6);
+  font-size: 15px;
+}
+.contact-item i {
+  width: 40px; height: 40px;
+  background: rgba(16,101,192,0.2);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--primary-light);
+  font-size: 15px;
+  flex-shrink: 0;
+}
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 8px;
+  padding: 14px 16px;
+  color: #fff;
+  font-size: 15px;
+  font-family: 'Space Grotesk', sans-serif;
+  outline: none;
+  transition: border-color 0.3s;
+}
+.form-group input::placeholder,
+.form-group textarea::placeholder { color: rgba(255,255,255,0.25); }
+.form-group input:focus,
+.form-group textarea:focus { border-color: var(--primary); }
+.form-group textarea { height: 130px; resize: vertical; }
+.submit-btn {
+  width: 100%;
+  padding: 16px;
+  font-size: 16px;
+  border-radius: 8px;
+}
+
+/* FOOTER */
+footer {
+  background: var(--black);
+  color: rgba(255,255,255,0.4);
+  text-align: center;
+  padding: 50px 40px;
+  border-top: 1px solid rgba(255,255,255,0.05);
+}
+.footer-logo {
+  font-size: 24px;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 20px;
+}
+.footer-logo span { color: var(--primary-light); }
+.footer-social {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 28px;
+}
+.footer-social a {
+  width: 38px; height: 38px;
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255,255,255,0.4);
+  font-size: 14px;
+  text-decoration: none;
+  transition: all 0.3s;
+}
+.footer-social a:hover {
+  border-color: var(--primary-light);
+  color: var(--primary-light);
+}
+.copy { font-size: 13px; }
+
+/* SCROLL REVEAL */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* CUSTOM CURSOR */
+* { cursor: none; }
+.cursor-dot {
+  width: 8px; height: 8px;
+  background: var(--primary-light);
+  border-radius: 50%;
+  position: fixed;
+  top: 0; left: 0;
+  pointer-events: none;
+  z-index: 99999;
+  transition: transform 0.1s ease;
+}
+.cursor-outline {
+  width: 36px; height: 36px;
+  border: 2px solid rgba(65,167,245,0.5);
+  border-radius: 50%;
+  position: fixed;
+  top: 0; left: 0;
+  pointer-events: none;
+  z-index: 99998;
+  transition: transform 0.15s ease, width 0.3s ease, height 0.3s ease, border-color 0.3s ease;
+}
+.cursor-outline.hover {
+  width: 56px; height: 56px;
+  border-color: var(--primary);
+  background: rgba(16,101,192,0.08);
+}
+
+/* MOBILE */
+@media (max-width: 768px) {
+  nav { padding: 16px 24px; }
+  .nav-links {
+    display: none;
+    position: absolute;
+    top: 70px; left: 0; right: 0;
+    background: rgba(10,10,10,0.98);
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+    padding: 20px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+  .nav-links.open { display: flex; }
+  .nav-links li { width: 100%; text-align: center; }
+  .nav-links a { display: block; padding: 14px 0; font-size: 17px; }
+  .hamburger { display: flex; }
+  #home { padding: 120px 30px 80px; }
+  #about { grid-template-columns: 1fr; padding: 80px 30px; gap: 50px; }
+  #services { padding: 80px 24px; }
+  .services-grid { grid-template-columns: 1fr; }
+  #portfolio { padding: 80px 24px; }
+  .portfolio-grid { grid-template-columns: repeat(2, 1fr); }
+  #contact { padding: 80px 24px; }
+  .contact-grid { grid-template-columns: 1fr; }
+  .form-row { grid-template-columns: 1fr; }
+  .skill-grid { grid-template-columns: repeat(2, 1fr); }
+  .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 40px 20px; }
+  .stat-item::after { display: none; }
+}
+
+/* Hide cursor on touch devices */
+@media (hover: none) and (pointer: coarse) {
+  * { cursor: auto; }
+  .cursor-dot, .cursor-outline { display: none; }
+}
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+/* ============================================
+   NEOPROFILE COLOUR THEMES
+   To change theme: uncomment your preferred
+   theme and comment out the active one
+   ============================================ */
+
+/* THEME 1 — Ocean Blue (Default) */
+:root {
+  --primary: #1065C0;
+  --primary-light: #41A7F5;
+  --primary-mid: #2486D8;
+  --black: #0A0A0A;
+  --dark: #111111;
+  --card-dark: #1C1C1C;
+  --text-light: #F5F5F5;
+  --gradient: linear-gradient(135deg, #1065C0, #41A7F5);
+  --gradient45: linear-gradient(45deg, #1065C0, #41A7F5);
+}
+
+/* THEME 2 — Emerald Green
+:root {
+  --primary: #057A55;
+  --primary-light: #31C48D;
+  --primary-mid: #0E9F6E;
+  --black: #0A0A0A;
+  --dark: #111111;
+  --card-dark: #1C1C1C;
+  --text-light: #F5F5F5;
+  --gradient: linear-gradient(135deg, #057A55, #31C48D);
+  --gradient45: linear-gradient(45deg, #057A55, #31C48D);
+}
+*/
+
+/* THEME 3 — Sunset Orange
+:root {
+  --primary: #C05621;
+  --primary-light: #F6AD55;
+  --primary-mid: #DD6B20;
+  --black: #0A0A0A;
+  --dark: #111111;
+  --card-dark: #1C1C1C;
+  --text-light: #F5F5F5;
+  --gradient: linear-gradient(135deg, #C05621, #F6AD55);
+  --gradient45: linear-gradient(45deg, #C05621, #F6AD55);
+}
+*/
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  background: #fff;
+  color: #111;
+  overflow-x: hidden;
+}
+
+/* LOADER */
+.loader {
+  position: fixed;
+  inset: 0;
+  background: #0A0A0A;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.6s 
+  </style>
+</head>
+<body>
+
+<div class="loader" id="loader">
+  <div class="loader-inner">
+    <div class="loader-logo">Divine Edet<span>.</span></div>
+    <div class="loader-label">
+      <span class="loader-text">Loading Experience...</span>
+      <span class="loader-percent" id="loaderPercent">0%</span>
+    </div>
+    <div class="loader-bar">
+      <div class="loader-fill" id="loaderFill"></div>
+    </div>
+  </div>
+</div>
+
+<nav>
+  <a href="#home" class="nav-logo">Divine Edet<span>.</span></a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#home">Home</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#portfolio">Portfolio</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <button class="hamburger" id="hamburger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<section id="home">
+  <span class="hero-tag">Available for Freelance Jobs</span>
+  <h1 class="hero-title">
+    Hello, I'm
+    <span class="hero-name">Divine Edet</span>
+  </h1>
+  <p class="hero-sub">A Web designer & developer</p>
+  <p class="hero-desc">I craft premium digital experiences — from stunning websites to powerful brand identities that help businesses grow online.</p>
+  <div class="hero-btns">
+    <a href="#contact" class="btn-primary">Get in Touch</a>
+    <a href="#portfolio" class="btn-outline">View My Work</a>
+  </div>
+  <div class="social-icons">
+    <a href="https://www.facebook.com/profile.php?id=61574409166468"><i class="fab fa-facebook-f"></i></a>
+    <a href="https://www.instagram.com/divineedet9/?__pwa=1"><i class="fab fa-instagram"></i></a>
+    <a href="https://www.tiktok.com/@chris.jay489?_r=1&_d=eje0ec8jk06c06&sec_uid=MS4wLjABAAAAVAaj37ZGWky8C0b812yJutHbdJzL6fhNYpOQb2o_XY0r7hWg6AuvSgtMMB1Opecd&share_author_id=7486255001897550866&sharer_language=en&source=h5_m&u_code=eje0fll4880bf2&timestamp=1775509030&user_id=7486255001897550866&sec_user_id=MS4wLjABAAAAVAaj37ZGWky8C0b812yJutHbdJzL6fhNYpOQb2o_XY0r7hWg6AuvSgtMMB1Opecd&utm_source=copy&utm_campaign=client_share&utm_medium=android&share_iid=7486255190486058770&share_link_id=8ba09af7-c611-40ff-9512-c5436445550c&share_app_id=1233&ugbiz_name=ACCOUNT&ug_btm=b8727%2Cb4907&social_share_type=5&enable_checksum=1"><i class="fab fa-tiktok"></i></a>
+    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+  </div>
+</section>
+
+<section id="about">
+  <div class="about-text reveal">
+    <h2>About Me</h2>
+    <h1>A Creative Designer<br>with a Purpose</h1>
+    <p>Divine Edet is a creative web designer and front-end developer passionate about building clean, responsive websites that help brands grow online.</p>
+    <div class="about-btns">
+      <a href="#contact" class="btn-dark">Hire Me</a>
+      <a href="#" class="btn-border">Download CV</a>
+    </div>
+  </div>
+  <div class="skills-side reveal">
+    <h2>My Skills</h2>
+    <div class="skill-grid">
+      <div class="skill-item">
+        <div class="skill-header"><span>Web development</span><span class="pct">96%</span></div>
+        <div class="skill-bar"><div class="skill-fill" data-width="96"></div></div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-header"><span>Wordpress</span><span class="pct">92%</span></div>
+        <div class="skill-bar"><div class="skill-fill" data-width="92"></div></div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-header"><span>SEO Fundamentals</span><span class="pct">85%</span></div>
+        <div class="skill-bar"><div class="skill-fill" data-width="85"></div></div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-header"><span>InDesign</span><span class="pct">94%</span></div>
+        <div class="skill-bar"><div class="skill-fill" data-width="94"></div></div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-header"><span>Brand Identity</span><span class="pct">82%</span></div>
+        <div class="skill-bar"><div class="skill-fill" data-width="82"></div></div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-header"><span>Web Design</span><span class="pct">88%</span></div>
+        <div class="skill-bar"><div class="skill-fill" data-width="88"></div></div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-header"><span>UI/UX Design</span><span class="pct">86%</span></div>
+        <div class="skill-bar"><div class="skill-fill" data-width="86"></div></div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-header"><span>Adobe XD</span><span class="pct">80%</span></div>
+        <div class="skill-bar"><div class="skill-fill" data-width="80"></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+  <section id="stats">
+  <div class="stats-grid">
+    <div class="stat-item reveal">
+      <span class="stat-number" data-target="120">0</span>
+      <span class="stat-plus">+</span>
+      <p class="stat-label">Projects Completed</p>
+    </div>
+    <div class="stat-item reveal">
+      <span class="stat-number" data-target="50">0</span>
+      <span class="stat-plus">+</span>
+      <p class="stat-label">Happy Clients</p>
+    </div>
+    <div class="stat-item reveal">
+      <span class="stat-number" data-target="5">0</span>
+      <span class="stat-plus">+</span>
+      <p class="stat-label">Years Experience</p>
+    </div>
+    <div class="stat-item reveal">
+      <span class="stat-number" data-target="15">0</span>
+      <span class="stat-plus">+</span>
+      <p class="stat-label">Awards Won</p>
+    </div>
+  </div>
+  </section>
+  
+<section id="services">
+  <div class="section-header reveal">
+    <span class="section-tag">What I Offer</span>
+    <h1>Services</h1>
+    <p>A wide range of premium services to help your brand succeed online.</p>
+  </div>
+  <div class="services-grid">
+    <div class="service-card reveal">
+      <div class="service-icon"><i class="fas fa-laptop-code"></i></div>
+      <h2>Website Design & Development</h2>
+      <p>Landing pages, business websites, portfolios, e-commerce stores, and blogs — built clean, fast, and responsive.</p>
+    </div>
+    <div class="service-card reveal">
+      <div class="service-icon"><i class="fas fa-pencil-ruler"></i></div>
+      <h2>UI/UX Design</h2>
+      <p>Interface & experience design, wireframing, and interactive prototyping to plan your website before launch.</p>
+    </div>
+    <div class="service-card reveal">
+      <div class="service-icon"><i class="fas fa-palette"></i></div>
+      <h2>Branding & Visual Design</h2>
+      <p>Logo design, color schemes, typography, and brand-consistent visuals that make your business memorable.</p>
+    </div>
+    <div class="service-card reveal">
+      <div class="service-icon"><i class="fas fa-mobile-alt"></i></div>
+      <h2>Responsive Design</h2>
+      <p>Websites that look and work perfectly on every device — phones, tablets, and desktops.</p>
+    </div>
+  </div>
+</section>
+
+<section id="portfolio">
+  <div class="section-header reveal">
+    <span class="section-tag">My Services</span>
+    <h1>Portfolio</h1>
+    <p>A selection of recent projects showcasing design, development, and branding work.</p>
+  </div>
+  <div class="portfolio-grid">
+    <div class="portfolio-item reveal">
+      <img src="hero.jpg" alt="Project 1"/>
+      <div class="portfolio-overlay"><i class="fas fa-external-link-alt"></i></div>
+    </div>
+    <div class="portfolio-item reveal">
+      <img src="graphic.jpg" alt="Project 2"/>
+      <div class="portfolio-overlay"><i class="fas fa-external-link-alt"></i></div>
+    </div>
+    <div class="portfolio-item reveal">
+      <img src="ui.jpg" alt="Project 3"/>
+      <div class="portfolio-overlay"><i class="fas fa-external-link-alt"></i></div>
+    </div>
+    <div class="portfolio-item reveal">
+      <img src="social.jpg" alt="Project 4"/>
+      <div class="portfolio-overlay"><i class="fas fa-external-link-alt"></i></div>
+    </div>
+    <div class="portfolio-item reveal">
+      <img src="https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?w=600" alt="Project 5"/>
+      <div class="portfolio-overlay"><i class="fas fa-external-link-alt"></i></div>
+    </div>
+    <div class="portfolio-item reveal">
+      <img src="https://images.unsplash.com/photo-1586717791821-3f44a563fa4c?w=600" alt="Project 6"/>
+      <div class="portfolio-overlay"><i class="fas fa-external-link-alt"></i></div>
+    </div>
+  </div>
+  <div class="view-more-wrap">
+    <a href="#" class="btn-dark">View Full Portfolio</a>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="section-header reveal">
+    <span class="section-tag">Get in Touch</span>
+    <h1>Let's Work Together</h1>
+    <p>Have a project in mind? Send me a message and let's create something great.</p>
+  </div>
+  <div class="contact-grid">
+    <div class="contact-info reveal">
+      <h3>Contact Information</h3>
+      <p>Available for freelance projects, full-time roles, and collaborations.</p>
+      <div class="contact-item">
+  <i class="fas fa-envelope"></i>
+  <a href="https://mail.google.com/mail/?view=cm&to=edetdivine121@gmail.com" target="_blank" class="contact-link">edetdivine121@gmail.com</a>
+      </div>
+      <div class="contact-item">
+        <i class="fas fa-phone"></i>
+        <span>+2349130470866</span>
+      </div>
+      <div class="contact-item">
+        <i class="fas fa-map-marker-alt"></i>
+        <span>Available Worldwide (Remote)</span>
+      </div>
+    </div>
+    <form class="contact-form reveal" onsubmit="handleSubmit(event)">
+      <div class="form-row">
+        <div class="form-group">
+          <input type="text" placeholder="Your Name" required/>
+        </div>
+        <div class="form-group">
+          <input type="email" placeholder="Your Email" required/>
+        </div>
+      </div>
+      <div class="form-group">
+        <input type="text" placeholder="Subject"/>
+      </div>
+      <div class="form-group">
+        <textarea placeholder="Your message..."></textarea>
+      </div>
+      <button type="submit" class="btn-dark submit-btn">Send Message</button>
+    </form>
+  </div>
+</section>
+  
+<footer>
+  <div class="footer-logo">Divine Edet<span>.</span></div>
+  <div class="footer-social">
+    <a href="https://www.facebook.com/profile.php?id=61574409166468"><i class="fab fa-facebook-f"></i></a>
+    <a href="https://www.instagram.com/divineedet9/?__pwa=1"><i class="fab fa-instagram"></i></a>
+    <a href="https://www.tiktok.com/@chris.jay489?_r=1&_d=eje0ec8jk06c06&sec_uid=MS4wLjABAAAAVAaj37ZGWky8C0b812yJutHbdJzL6fhNYpOQb2o_XY0r7hWg6AuvSgtMMB1Opecd&share_author_id=7486255001897550866&sharer_language=en&source=h5_m&u_code=eje0fll4880bf2&timestamp=1775509030&user_id=7486255001897550866&sec_user_id=MS4wLjABAAAAVAaj37ZGWky8C0b812yJutHbdJzL6fhNYpOQb2o_XY0r7hWg6AuvSgtMMB1Opecd&utm_source=copy&utm_campaign=client_share&utm_medium=android&share_iid=7486255190486058770&share_link_id=8ba09af7-c611-40ff-9512-c5436445550c&share_app_id=1233&ugbiz_name=ACCOUNT&ug_btm=b8727%2Cb4907&social_share_type=5&enable_checksum=1"><i class="fab fa-tiktok"></i></a>
+    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+  </div>
+  <p class="copy">© 2026 Divine Edet. All rights reserved.</p>
+</footer>
+<script>// Loading screen
+const fill = document.getElementById('loaderFill');
+const percent = document.getElementById('loaderPercent');
+const loader = document.getElementById('loader');
+let progress = 0;
+
+const interval = setInterval(() => {
+  progress += Math.random() * 15;
+  if (progress >= 100) {
+    progress = 100;
+    fill.style.width = '100%';
+    percent.textContent = '100%';
+    clearInterval(interval);
+    setTimeout(() => {
+      loader.style.opacity = '0';
+      setTimeout(() => {
+        loader.remove();
+      }, 600);
+    }, 300);
+  } else {
+    fill.style.width = progress + '%';
+    fill.style.transition = 'width 0.3s ease';
+    percent.textContent = Math.floor(progress) + '%';
+  }
+}, 200);
+
+// Hamburger menu
+const hamburger = document.getElementById('hamburger');
+const navLinks = document.getElementById('navLinks');
+hamburger.addEventListener('click', () => {
+  navLinks.classList.toggle('open');
+});
+navLinks.querySelectorAll('a').forEach(a => {
+  a.addEventListener('click', () => navLinks.classList.remove('open'));
+});
+
+// Scroll reveal
+const reveals = document.querySelectorAll('.reveal');
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) entry.target.classList.add('visible');
+  });
+}, { threshold: 0.15 });
+reveals.forEach(el => observer.observe(el));
+
+// Skill bars
+const skillSection = document.getElementById('about');
+const skillObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      document.querySelectorAll('.skill-fill').forEach(bar => {
+        bar.style.width = bar.dataset.width + '%';
+      });
+    }
+  });
+}, { threshold: 0.3 });
+if (skillSection) skillObserver.observe(skillSection);
+
+// Animated stats counter
+const statNumbers = document.querySelectorAll('.stat-number');
+const statsObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const target = parseInt(entry.target.dataset.target);
+      const duration = 2000;
+      const step = target / (duration / 16);
+      let current = 0;
+      const counter = setInterval(() => {
+        current += step;
+        if (current >= target) {
+          current = target;
+          clearInterval(counter);
+        }
+        entry.target.textContent = Math.floor(current);
+      }, 16);
+      statsObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.5 });
+statNumbers.forEach(num => statsObserver.observe(num));
+
+// Custom cursor
+const cursorDot = document.getElementById('cursorDot');
+const cursorOutline = document.getElementById('cursorOutline');
+window.addEventListener('mousemove', (e) => {
+  cursorDot.style.transform = `translate(${e.clientX - 4}px, ${e.clientY - 4}px)`;
+  cursorOutline.style.transform = `translate(${e.clientX - 18}px, ${e.clientY - 18}px)`;
+});
+document.querySelectorAll('a, button, .service-card, .portfolio-item').forEach(el => {
+  el.addEventListener('mouseenter', () => cursorOutline.classList.add('hover'));
+  el.addEventListener('mouseleave', () => cursorOutline.classList.remove('hover'));
+});
+
+// Contact form
+function handleSubmit(e) {
+  e.preventDefault();
+  const btn = e.target.querySelector('button[type="submit"]');
+  btn.textContent = 'Message Sent ✓';
+  btn.style.background = 'linear-gradient(45deg, #00a86b, #00d4aa)';
+  setTimeout(() => {
+    btn.textContent = 'Send Message';
+    btn.style.background = '';
+    e.target.reset();
+  }, 3000);
+}</script>
+</body>
+</html>
+
+<div class="cursor-dot" id="cursorDot"></div>
+<div class="cursor-outline" id="cursorOutline"></div>
